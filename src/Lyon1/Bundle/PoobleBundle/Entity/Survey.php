@@ -85,7 +85,15 @@ class Survey
      * @ORM\OneToMany(targetEntity="SurveyAnswer", mappedBy="survey")
      */
     private $answers;
-    
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->items = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
     /**
      * @ORM\PrePersist
      */
@@ -249,13 +257,6 @@ class Survey
     public function getCategory()
     {
         return $this->category;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->items = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**

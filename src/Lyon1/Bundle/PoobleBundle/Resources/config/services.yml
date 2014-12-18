@@ -1,0 +1,14 @@
+services:
+
+    pooble.form.type.configure_choice:
+        class: Lyon1\Bundle\PoobleBundle\Form\SurveyConfigureChoiceType
+        arguments: []
+        tags:
+            - { name: form.type, alias: configure_choice }
+
+    pooble.form.type.configure_date:
+        class: Lyon1\Bundle\PoobleBundle\Form\SurveyConfigureDateType
+        arguments: []
+        tags:
+            - { name: form.type, alias: configure_date }
+

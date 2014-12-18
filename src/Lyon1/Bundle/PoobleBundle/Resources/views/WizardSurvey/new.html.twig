@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} New{% endblock %}
+
+{% block body %}
+    {% include 'PoobleBundle:WizardSurvey:breadcrumb.html.twig' %}
+
+    <h1>Create a new "Pooble"</h1>
+
+    {{ form(form) }}
+{% endblock %}

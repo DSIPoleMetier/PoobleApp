@@ -1,0 +1,4 @@
+pooble:
+    resource: "@PoobleBundle/Controller/"
+    type:     annotation
+    prefix:   /

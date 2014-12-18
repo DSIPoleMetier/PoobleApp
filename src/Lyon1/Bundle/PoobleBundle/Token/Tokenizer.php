@@ -16,6 +16,7 @@ class Tokenizer
     public function generateToken(Survey $survey)
     {
         $date = new \DateTime();        
+        
         return md5($this->secret.$date->format('Ymd').$survey->getName());
     }
 }

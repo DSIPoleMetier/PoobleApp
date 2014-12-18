@@ -9,3 +9,48 @@
 
     {{ form(form) }}
 {% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+
+        var collectionHolder = $('div#{{ form_type }}_items');
+
+        var $addItemLink = $('<a href="#" class="add_item_link">Ajouter un item</a>');
+        var $newLinkLi = $('<ul></ul>').append($addItemLink);
+
+        jQuery(document).ready(function() {
+            collectionHolder.append($newLinkLi);
+
+            $addItemLink.on('click', function(e) {
+                e.preventDefault();
+                addItemForm(collectionHolder, $newLinkLi);
+            });
+
+            collectionHolder.find('li').each(function() {
+                addItemFormDeleteLink($(this));
+            });
+        });
+
+        function addItemForm(collectionHolder, $newLinkLi) {
+            var prototype = collectionHolder.attr('data-prototype');
+
+            var newForm = prototype.replace(/__name__/g, collectionHolder.children().length);
+
+            var $newFormLi = $('<li></li>').append(newForm);
+            $newLinkLi.before($newFormLi);
+            addItemFormDeleteLink($newFormLi);
+        }
+
+        function addItemFormDeleteLink($tagFormLi) {
+            var $removeFormA = $('<a href="#">Supprimer cet item</a>');
+            $tagFormLi.append($removeFormA);
+
+            $removeFormA.on('click', function(e) {
+                e.preventDefault();
+                $tagFormLi.remove();
+            });
+        }
+
+    </script>
+{% endblock %}

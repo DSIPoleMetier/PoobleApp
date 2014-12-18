@@ -11,7 +11,14 @@ class SurveyConfigureDateType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options = array())
     {
         $builder
-           ->add('date', 'datetime')
+            ->add('items', 'collection', 
+                array(
+                    'type' => new SurveyItemDateType(),
+                    'allow_add' => true,
+                    'allow_delete' => true,
+                    'by_reference' => false,
+                )
+            )
         ;
     }
 

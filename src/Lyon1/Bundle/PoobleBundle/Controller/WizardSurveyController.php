@@ -7,6 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 use Lyon1\Bundle\PoobleBundle\Entity\Survey;
+use Lyon1\Bundle\PoobleBundle\Entity\SurveyItem;
 use Lyon1\Bundle\PoobleBundle\Form\SurveyType;
 use Lyon1\Bundle\PoobleBundle\Factory\SurveyConfigureTypeFactory;
 
@@ -47,13 +48,21 @@ class WizardSurveyController extends Controller
     public function newConfigureAction(Request $request)
     {
         $survey = $request->getSession()->get('pending_survey');
+        $em = $this->getDoctrine()->getManager();
+        $survey = $em->merge($survey);
 
-        $form = $this->createForm($survey->getCategory()->getType());
+        if ( count( $survey->getItems() ) == 0 ) {
+            $item = new SurveyItem();
+            $survey->addItem($item);
+        }
+
+        $form = $this->createForm($survey->getCategory()->getType(), $survey);
         $form->add('end', 'submit');
 
         $form->handleRequest($request);
 
         if ($form->isValid()) {
+            // var_dump(count($survey->getItems()));die;
             /**
              * Hugly hack due to Doctrine bug:
              * http://www.doctrine-project.org/jira/browse/DDC-2406
@@ -63,8 +72,6 @@ class WizardSurveyController extends Controller
                 ->setUpdatedAt(new \DateTime())
             ;
             // End
-            $em = $this->getDoctrine()->getManager();
-            $survey = $em->merge($survey);
             $em->flush();
 
             return $this->redirect($this->generateUrl('pooble_created', array(
@@ -72,7 +79,10 @@ class WizardSurveyController extends Controller
             )));
         }
 
-        return array('form' => $form->createView());
+        return array(
+            'form' => $form->createView(),
+            'form_type' => $survey->getCategory()->getType(),
+        );
     }
 
     /**

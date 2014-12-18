@@ -11,17 +11,22 @@ class SurveyConfigureChoiceType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options = array())
     {
         $builder
-           ->add('choice', 'text')
+            ->add('items', 'collection', 
+                array(
+                    'type' => new SurveyItemType(),
+                    'allow_add' => true,
+                    'allow_delete' => true,
+                    'by_reference' => false,
+                )
+            )
         ;
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        /*
         $resolver->setDefaults(array(
             'data_class' => 'Lyon1\Bundle\PoobleBundle\Entity\Survey'
         ));
-        */
     }
 
     public function getName()

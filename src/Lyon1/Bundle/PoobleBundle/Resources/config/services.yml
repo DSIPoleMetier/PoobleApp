@@ -12,3 +12,8 @@ services:
         tags:
             - { name: form.type, alias: configure_date }
 
+    pooble.form.type.times_selector:
+        class: Lyon1\Bundle\PoobleBundle\Form\TimesSelectorType
+        arguments: []
+        tags:
+            - { name: form.type, alias: times_selector }

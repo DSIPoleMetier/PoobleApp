@@ -33,7 +33,7 @@ class WizardSurveyController extends Controller
 
         if ($form->isValid()) {
             $session->set('pending_survey', $form->getData());
-
+            $survey->setToken($this->container->get('pooble.tokenizer')->generateToken($survey));
             return $this->redirect($this->generateUrl('pooble_new_configure'));
         }
 

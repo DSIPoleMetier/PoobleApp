@@ -57,6 +57,13 @@ class Survey
      */
     private $updatedAt;
 
+     /**
+     * @var string
+     *
+     * @ORM\Column(name="token", type="string", length=32, unique=true)
+     */
+    private $token;
+
     /**
      * @var SurveyCategory
      *

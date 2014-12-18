@@ -43,11 +43,11 @@ class SurveyAnswerItem
      * @ORM\JoinColumn(name="survey_item_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $item;
-    
+
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {

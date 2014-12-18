@@ -42,19 +42,26 @@ class SurveyAnswer
      * @ORM\JoinColumn(name="survey_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $survey;
-    
+
     /**
      * @var SurveyAnswerItems[]
      *
      * @ORM\OneToMany(targetEntity="SurveyAnswerItem", mappedBy="answer")
      */
     private $answerItems;
-    
-    
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->answerItems = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -106,13 +113,6 @@ class SurveyAnswer
     {
         return $this->createdAt;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->answerItems = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
     /**
      * Set survey
@@ -130,7 +130,7 @@ class SurveyAnswer
     /**
      * Get survey
      *
-     * @return \Lyon1\Bundle\PoobleBundle\Entity\Survey 
+     * @return \Lyon1\Bundle\PoobleBundle\Entity\Survey
      */
     public function getSurvey()
     {
@@ -138,32 +138,32 @@ class SurveyAnswer
     }
 
     /**
-     * Add answerItems
+     * Add answerItem
      *
-     * @param \Lyon1\Bundle\PoobleBundle\Entity\SurveyAnswerItem $answerItems
+     * @param \Lyon1\Bundle\PoobleBundle\Entity\SurveyAnswerItem $answerItem
      * @return SurveyAnswer
      */
-    public function addAnswerItem(\Lyon1\Bundle\PoobleBundle\Entity\SurveyAnswerItem $answerItems)
+    public function addAnswerItem(\Lyon1\Bundle\PoobleBundle\Entity\SurveyAnswerItem $answerItem)
     {
-        $this->answerItems[] = $answerItems;
+        $this->answerItems[] = $answerItem;
 
         return $this;
     }
 
     /**
-     * Remove answerItems
+     * Remove answerItem
      *
-     * @param \Lyon1\Bundle\PoobleBundle\Entity\SurveyAnswerItem $answerItems
+     * @param \Lyon1\Bundle\PoobleBundle\Entity\SurveyAnswerItem $answerItem
      */
-    public function removeAnswerItem(\Lyon1\Bundle\PoobleBundle\Entity\SurveyAnswerItem $answerItems)
+    public function removeAnswerItem(\Lyon1\Bundle\PoobleBundle\Entity\SurveyAnswerItem $answerItem)
     {
-        $this->answerItems->removeElement($answerItems);
+        $this->answerItems->removeElement($answerItem);
     }
 
     /**
      * Get answerItems
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getAnswerItems()
     {

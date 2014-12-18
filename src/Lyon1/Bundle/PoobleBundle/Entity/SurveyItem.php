@@ -42,14 +42,22 @@ class SurveyItem
      * @ORM\JoinColumn(name="survey_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $survey;
-    
+
     /**
      * @var SurveyAnswerItems[]
      *
      * @ORM\OneToMany(targetEntity="SurveyAnswerItem", mappedBy="item")
      */
     private $answerItems;
-    
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->answerItems = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
     /**
      * Get id
      *
@@ -128,35 +136,28 @@ class SurveyItem
     {
         return $this->survey;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->answerItems = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
     /**
-     * Add answerItems
+     * Add answerItem
      *
-     * @param \Lyon1\Bundle\PoobleBundle\Entity\SurveyAnswerItem $answerItems
+     * @param \Lyon1\Bundle\PoobleBundle\Entity\SurveyAnswerItem $answerItem
      * @return SurveyItem
      */
-    public function addAnswerItem(\Lyon1\Bundle\PoobleBundle\Entity\SurveyAnswerItem $answerItems)
+    public function addAnswerItem(\Lyon1\Bundle\PoobleBundle\Entity\SurveyAnswerItem $answerItem)
     {
-        $this->answerItems[] = $answerItems;
+        $this->answerItems[] = $answerItem;
 
         return $this;
     }
 
     /**
-     * Remove answerItems
+     * Remove answerItem
      *
-     * @param \Lyon1\Bundle\PoobleBundle\Entity\SurveyAnswerItem $answerItems
+     * @param \Lyon1\Bundle\PoobleBundle\Entity\SurveyAnswerItem $answerItem
      */
-    public function removeAnswerItem(\Lyon1\Bundle\PoobleBundle\Entity\SurveyAnswerItem $answerItems)
+    public function removeAnswerItem(\Lyon1\Bundle\PoobleBundle\Entity\SurveyAnswerItem $answerItem)
     {
-        $this->answerItems->removeElement($answerItems);
+        $this->answerItems->removeElement($answerItem);
     }
 
     /**

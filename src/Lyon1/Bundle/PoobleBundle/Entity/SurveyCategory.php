@@ -140,7 +140,7 @@ class SurveyCategory
     /**
      * Get surveys
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getSurveys()
     {

@@ -292,26 +292,26 @@ class Survey
     }
 
     /**
-     * Add answers
+     * Add answer
      *
-     * @param \Lyon1\Bundle\PoobleBundle\Entity\SurveyAnswer $answers
+     * @param \Lyon1\Bundle\PoobleBundle\Entity\SurveyAnswer $answer
      * @return Survey
      */
-    public function addAnswer(\Lyon1\Bundle\PoobleBundle\Entity\SurveyAnswer $answers)
+    public function addAnswer(\Lyon1\Bundle\PoobleBundle\Entity\SurveyAnswer $answer)
     {
-        $this->answers[] = $answers;
+        $this->answers[] = $answer;
 
         return $this;
     }
 
     /**
-     * Remove answers
+     * Remove answer
      *
-     * @param \Lyon1\Bundle\PoobleBundle\Entity\SurveyAnswer $answers
+     * @param \Lyon1\Bundle\PoobleBundle\Entity\SurveyAnswer $answer
      */
-    public function removeAnswer(\Lyon1\Bundle\PoobleBundle\Entity\SurveyAnswer $answers)
+    public function removeAnswer(\Lyon1\Bundle\PoobleBundle\Entity\SurveyAnswer $answer)
     {
-        $this->answers->removeElement($answers);
+        $this->answers->removeElement($answer);
     }
 
     /**

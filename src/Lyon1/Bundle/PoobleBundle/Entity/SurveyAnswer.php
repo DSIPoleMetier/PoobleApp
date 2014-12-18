@@ -5,12 +5,12 @@ namespace Lyon1\Bundle\PoobleBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * SurveyItem
+ * SurveyAnswer
  *
- * @ORM\Table(name="survey_item")
+ * @ORM\Table(name="survey_answer")
  * @ORM\Entity
  */
-class SurveyItem
+class SurveyAnswer
 {
     /**
      * @var integer
@@ -29,16 +29,16 @@ class SurveyItem
     private $name;
 
     /**
-     * @var string
+     * @var \DateTime
      *
-     * @ORM\Column(name="description", type="text")
+     * @ORM\Column(name="createdAt", type="datetime")
      */
-    private $description;
+    private $createdAt;
 
     /**
      * @var Survey
      *
-     * @ORM\ManyToOne(targetEntity="Survey", inversedBy="items", cascade={"remove"})
+     * @ORM\ManyToOne(targetEntity="Survey", inversedBy="answers")
      * @ORM\JoinColumn(name="survey_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $survey;
@@ -46,14 +46,15 @@ class SurveyItem
     /**
      * @var SurveyAnswerItems[]
      *
-     * @ORM\OneToMany(targetEntity="SurveyAnswerItem", mappedBy="item")
+     * @ORM\OneToMany(targetEntity="SurveyAnswerItem", mappedBy="answer")
      */
     private $answerItems;
+    
     
     /**
      * Get id
      *
-     * @return integer
+     * @return integer 
      */
     public function getId()
     {
@@ -64,7 +65,7 @@ class SurveyItem
      * Set name
      *
      * @param string $name
-     * @return SurveyItem
+     * @return SurveyAnswer
      */
     public function setName($name)
     {
@@ -76,7 +77,7 @@ class SurveyItem
     /**
      * Get name
      *
-     * @return string
+     * @return string 
      */
     public function getName()
     {
@@ -84,33 +85,40 @@ class SurveyItem
     }
 
     /**
-     * Set description
+     * Set createdAt
      *
-     * @param string $description
-     * @return SurveyItem
+     * @param \DateTime $createdAt
+     * @return SurveyAnswer
      */
-    public function setDescription($description)
+    public function setCreatedAt($createdAt)
     {
-        $this->description = $description;
+        $this->createdAt = $createdAt;
 
         return $this;
     }
 
     /**
-     * Get description
+     * Get createdAt
      *
-     * @return string 
+     * @return \DateTime 
      */
-    public function getDescription()
+    public function getCreatedAt()
     {
-        return $this->description;
+        return $this->createdAt;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->answerItems = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
      * Set survey
      *
      * @param \Lyon1\Bundle\PoobleBundle\Entity\Survey $survey
-     * @return SurveyItem
+     * @return SurveyAnswer
      */
     public function setSurvey(\Lyon1\Bundle\PoobleBundle\Entity\Survey $survey = null)
     {
@@ -128,19 +136,12 @@ class SurveyItem
     {
         return $this->survey;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->answerItems = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
     /**
      * Add answerItems
      *
      * @param \Lyon1\Bundle\PoobleBundle\Entity\SurveyAnswerItem $answerItems
-     * @return SurveyItem
+     * @return SurveyAnswer
      */
     public function addAnswerItem(\Lyon1\Bundle\PoobleBundle\Entity\SurveyAnswerItem $answerItems)
     {

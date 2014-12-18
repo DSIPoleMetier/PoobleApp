@@ -73,6 +73,13 @@ class Survey
     private $items;
 
     /**
+     * @var SurveyAnswer[]
+     *
+     * @ORM\OneToMany(targetEntity="SurveyAnswer", mappedBy="survey")
+     */
+    private $answers;
+    
+    /**
      * @ORM\PrePersist
      */
     public function onCreate()
@@ -275,5 +282,38 @@ class Survey
     public function getItems()
     {
         return $this->items;
+    }
+
+    /**
+     * Add answers
+     *
+     * @param \Lyon1\Bundle\PoobleBundle\Entity\SurveyAnswer $answers
+     * @return Survey
+     */
+    public function addAnswer(\Lyon1\Bundle\PoobleBundle\Entity\SurveyAnswer $answers)
+    {
+        $this->answers[] = $answers;
+
+        return $this;
+    }
+
+    /**
+     * Remove answers
+     *
+     * @param \Lyon1\Bundle\PoobleBundle\Entity\SurveyAnswer $answers
+     */
+    public function removeAnswer(\Lyon1\Bundle\PoobleBundle\Entity\SurveyAnswer $answers)
+    {
+        $this->answers->removeElement($answers);
+    }
+
+    /**
+     * Get answers
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAnswers()
+    {
+        return $this->answers;
     }
 }

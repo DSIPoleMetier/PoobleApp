@@ -12,3 +12,6 @@ services:
         tags:
             - { name: form.type, alias: configure_date }
 
+    pooble.tokenizer:
+        class: Lyon1\Bundle\PoobleBundle\Token\Tokenizer
+        arguments: [%kernel.secret%]

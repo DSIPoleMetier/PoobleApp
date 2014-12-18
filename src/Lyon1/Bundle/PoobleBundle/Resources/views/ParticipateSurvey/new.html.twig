@@ -1,0 +1,34 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <h1>{{ survey.name }}</h1>
+    <p>{{ survey.description }}</p>
+    
+    {{ form_start(form) }}
+    <table>
+        <thead>
+            <tr>
+                <td>Nom du participant</td>
+                {% for item in survey.items %}
+                    <td>{{ item.name }}</td>
+                {% endfor %}
+        </thead>
+        <tbody>
+            {% for answer in survey.answers %}
+                <tr>
+                    <th>{{ answer.name }}</th>
+                    {% for answerItem in answer.answerItems %}
+                        <td>{{ answerItem.value }}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+            <tr>
+                <th>{{ form_row(form.name) }}</th>
+                {% for item in survey.items %}
+                    <td>{{ form_widget(form.offsetGet('item_'~item.id)) }}</td>
+                {% endfor %}
+            </tr>
+        </tbody>
+    </table>
+    {{ form_end(form) }}
+{% endblock %}

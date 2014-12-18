@@ -61,6 +61,7 @@ class WizardSurveyController extends Controller
             $survey
                 ->setCreatedAt(new \DateTime())
                 ->setUpdatedAt(new \DateTime())
+                ->setToken($this->container->get('pooble.tokenizer')->generateToken($survey))
             ;
             // End
             $em = $this->getDoctrine()->getManager();

@@ -324,4 +324,27 @@ class Survey
     {
         return $this->answers;
     }
+
+    /**
+     * Set token
+     *
+     * @param string $token
+     * @return Survey
+     */
+    public function setToken($token)
+    {
+        $this->token = $token;
+
+        return $this;
+    }
+
+    /**
+     * Get token
+     *
+     * @return string 
+     */
+    public function getToken()
+    {
+        return $this->token;
+    }
 }

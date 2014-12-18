@@ -16,14 +16,4 @@ class HomeController extends Controller
     {
         return array();
     }
-
-    /**
-     * @Route("/hello/{name}", name="hello", requirements={"name" = "^[a-zA-Z]+$"})
-     * @Route("/hello", defaults={"name" = "John Doe"})
-     * @Template()
-     */
-    public function helloAction($name)
-    {
-        return array('name' => $name);
-    }
 }

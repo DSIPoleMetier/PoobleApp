@@ -17,3 +17,13 @@ services:
         arguments: []
         tags:
             - { name: form.type, alias: times_selector }
+
+    pooble.tokenizer:
+        class: Lyon1\Bundle\PoobleBundle\Token\Tokenizer
+        arguments: [%kernel.secret%]
+
+    pooble.subscriber.survey:
+        class: Lyon1\Bundle\PoobleBundle\Subscriber\SurveySubscriber
+        arguments: [@pooble.tokenizer]
+        tags:
+            - { name: doctrine.event_subscriber, connection: default }

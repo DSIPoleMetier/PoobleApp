@@ -57,6 +57,13 @@ class Survey
      */
     private $updatedAt;
 
+     /**
+     * @var string
+     *
+     * @ORM\Column(name="token", type="string", length=32, unique=true)
+     */
+    private $token;
+
     /**
      * @var SurveyCategory
      *
@@ -71,6 +78,21 @@ class Survey
      * @ORM\OneToMany(targetEntity="SurveyItem", mappedBy="survey", cascade={"all"})
      */
     private $items;
+
+    /**
+     * @var SurveyAnswer[]
+     *
+     * @ORM\OneToMany(targetEntity="SurveyAnswer", mappedBy="survey")
+     */
+    private $answers;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->items = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * @ORM\PrePersist
@@ -236,13 +258,6 @@ class Survey
     {
         return $this->category;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->items = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
     /**
      * Add item
@@ -276,5 +291,61 @@ class Survey
     public function getItems()
     {
         return $this->items;
+    }
+
+    /**
+     * Add answer
+     *
+     * @param \Lyon1\Bundle\PoobleBundle\Entity\SurveyAnswer $answer
+     * @return Survey
+     */
+    public function addAnswer(\Lyon1\Bundle\PoobleBundle\Entity\SurveyAnswer $answer)
+    {
+        $this->answers[] = $answer;
+
+        return $this;
+    }
+
+    /**
+     * Remove answer
+     *
+     * @param \Lyon1\Bundle\PoobleBundle\Entity\SurveyAnswer $answer
+     */
+    public function removeAnswer(\Lyon1\Bundle\PoobleBundle\Entity\SurveyAnswer $answer)
+    {
+        $this->answers->removeElement($answer);
+    }
+
+    /**
+     * Get answers
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAnswers()
+    {
+        return $this->answers;
+    }
+
+    /**
+     * Set token
+     *
+     * @param string $token
+     * @return Survey
+     */
+    public function setToken($token)
+    {
+        $this->token = $token;
+
+        return $this;
+    }
+
+    /**
+     * Get token
+     *
+     * @return string 
+     */
+    public function getToken()
+    {
+        return $this->token;
     }
 }

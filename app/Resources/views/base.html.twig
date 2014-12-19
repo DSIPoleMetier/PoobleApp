@@ -13,6 +13,9 @@
         <script src="{{ asset('bundles/pooble/foundation/js/vendor/modernizr.js') }}"></script>
     </head>
     <body>
+        {% block topBar %}
+            {% include 'PoobleBundle::topBar.html.twig' %}
+        {% endblock %}
         {% block body %}{% endblock %}
         {% block javascripts %}
             <script type="text/javascript" src="{{ asset('bundles/pooble/foundation/js/vendor/jquery.js') }}"></script>

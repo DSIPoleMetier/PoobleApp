@@ -5,9 +5,23 @@
 {% block body %}
     {% include 'PoobleBundle:WizardSurvey:breadcrumb.html.twig' %}
 
-    <h1>Configure your "Pooble"</h1>
 
-    {{ form(form) }}
+    <div class="row">
+        <div class="small-12">
+    <h1>Configure your "Pooble"</h1>     
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="small-12">
+    {{ form(form) }}    
+        </div>
+    </div>
+
+
+
+
 {% endblock %}
 
 {% block javascripts %}

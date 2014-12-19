@@ -18,19 +18,18 @@ class FrontSurveyController extends Controller
      * @Template()
      */
     public function participateAction(Request $request, $token)
-    {   
-        # recupération du survey
+    {
         $em = $this->getDoctrine()->getManager();
         $survey = $em->getRepository('PoobleBundle:Survey')->findOneBy(array('token' => $token));
         if (null == $survey) {
-            throw $this->createNotFoundException("token invalide");
+            throw $this->createNotFoundException("Survey not found (Wrong token)");
         }
-        
+
         $answer = new SurveyAnswer();
         $answer->setSurvey($survey);
         $form = $this->createForm(new SurveyAnswerType(), $answer);
         $form->add('Valider', 'submit');
-        
+
         $form->handleRequest($request);
         if ($form->isValid()) {
             $fields = $request->request->all();
@@ -46,37 +45,33 @@ class FrontSurveyController extends Controller
                 }
                 $answer->addAnswerItem($sai);
             }
-            
+
             $em = $this->getDoctrine()->getManager();
             $answer->setCreatedAt(new \DateTime());
             $answer = $em->persist($answer);
             $em->flush();
         }
-        
-        
+
         return array(
             'survey' => $survey,
             'form' => $form->createView()
         );
     }
 
-     /**
+    /**
      * @Route("/view/{token}", name="view")
      * @Template("PoobleBundle:FrontSurvey:participate.html.twig")
      */
     public function viewAction(Request $request, $token)
-    {   
-        # recupération du survey
+    {
         $em = $this->getDoctrine()->getManager();
         $survey = $em->getRepository('PoobleBundle:Survey')->findOneBy(array('token' => $token));
         if (null == $survey) {
-            throw $this->createNotFoundException("token invalide");
+            throw $this->createNotFoundException("Survey not found (Wrong token)");
         }
-        
-        
+
         return array(
             'survey' => $survey
         );
     }
-    
 }

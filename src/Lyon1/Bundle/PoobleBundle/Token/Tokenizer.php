@@ -17,6 +17,6 @@ class Tokenizer
     {
         $date = new \DateTime();        
         
-        return md5($this->secret.$date->format('Ymd').$survey->getName());
+        return md5($this->secret.$date->format('Ymd H:i:s:u').$survey->getName());
     }
 }

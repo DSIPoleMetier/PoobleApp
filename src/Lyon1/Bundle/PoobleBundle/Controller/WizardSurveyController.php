@@ -18,7 +18,7 @@ class WizardSurveyController extends Controller
      * @Template()
      */
     public function newAction(Request $request)
-    {
+    {        
         $session = $request->getSession();
 
         $survey = new Survey();
@@ -76,7 +76,7 @@ class WizardSurveyController extends Controller
             $em->flush();
 
             return $this->redirect($this->generateUrl('pooble_created', array(
-                'id' => $survey->getId()
+                'token' => $survey->getToken()
             )));
         }
 
@@ -87,13 +87,19 @@ class WizardSurveyController extends Controller
     }
 
     /**
-     * @Route("/created/{id}", name="pooble_created")
+     * @Route("/created/{token}", name="pooble_created")
      * @Template()
      */
-    public function createdAction(Request $request, $id)
+    public function createdAction(Request $request, $token)
     {
         $request->getSession()->remove('pending_survey');
 
-        return array('id' => $id);
+        $em = $this->getDoctrine()->getManager();
+        $survey = $em->getRepository('PoobleBundle:Survey')->findOneBy(array('token' => $token));
+        if (null == $survey) {
+            throw $this->createNotFoundException("token invalide");
+        }
+
+        return array('survey' => $survey);
     }
 }

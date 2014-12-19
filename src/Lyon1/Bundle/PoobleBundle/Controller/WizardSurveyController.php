@@ -11,6 +11,9 @@ use Lyon1\Bundle\PoobleBundle\Entity\SurveyItem;
 use Lyon1\Bundle\PoobleBundle\Form\SurveyType;
 use Lyon1\Bundle\PoobleBundle\Factory\SurveyConfigureTypeFactory;
 
+/**
+ * @Route("{_locale}")
+ */
 class WizardSurveyController extends Controller
 {
     /**

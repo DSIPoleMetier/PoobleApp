@@ -1,19 +1,16 @@
 {% extends 'base.html.twig' %}
 
-
- 
-{% block title %}{{ parent() }} New{% endblock %}			
-
-
+{% block title %}{{ parent() }} {% trans %}New{% endtrans %}{% endblock %}
 
 {% block body %}
     {% include 'PoobleBundle:WizardSurvey:breadcrumb.html.twig' %}
 
     <div class="row">
     	<div class="small-12">
-			<h1 class="text-center">Create a new "Pooble"</h1>
+			<h1 class="text-center">{% trans %}Create a new "Pooble"{% endtrans %}</h1>
 		</div>
 	</div>
+
 
     <div class="row">
     	<div class="small-12">		

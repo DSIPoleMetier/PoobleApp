@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ parent() }} Configure{% endblock %}
+{% block title %}{{ parent() }} {% trans %}Configure{% endtrans %}{% endblock %}
 
 {% block body %}
     {% include 'PoobleBundle:WizardSurvey:breadcrumb.html.twig' %}
@@ -8,7 +8,7 @@
 
     <div class="row">
         <div class="small-12">
-    <h1>Configure your "Pooble"</h1>     
+    <h1>{% trans %}Configure your "Pooble"{% endtrans %}</h1>     
         </div>
     </div>
 
@@ -20,8 +20,6 @@
     </div>
 
 
-
-
 {% endblock %}
 
 {% block javascripts %}
@@ -30,7 +28,7 @@
 
         var collectionHolder = $('div#{{ form_type }}_items');
 
-        var $addItemLink = $('<a href="#" class="add_item_link">Ajouter un item</a>');
+        var $addItemLink = $('<a href="#" class="add_item_link">{% trans %}Add an item{% endtrans %}</a>');
         var $newLinkLi = $('<ul></ul>').append($addItemLink);
 
         jQuery(document).ready(function() {
@@ -57,7 +55,7 @@
         }
 
         function addItemFormDeleteLink($tagFormLi) {
-            var $removeFormA = $('<a href="#">Supprimer cet item</a>');
+            var $removeFormA = $('<a href="#">{% trans %}Delete this item{% endtrans %}</a>');
             $tagFormLi.append($removeFormA);
 
             $removeFormA.on('click', function(e) {

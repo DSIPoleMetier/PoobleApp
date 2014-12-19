@@ -5,13 +5,13 @@
 {% block body %}
     <div class="row">
     	<div class="small-12">
-			<h1 class="text-center">Bienvenue sur pooble application</h1>
+			<h1 class="text-center">{% trans %}Welcome to pooble application{% endtrans %}</h1>
 		</div>
 	</div>
 
 	<div class="row">
     	<div class="small-4 small-centered columns">
-			<a href="{{ path('pooble_new') }}" class="button round">Créer un nouveau sondage</a>
+			<a href="{{ path('pooble_new') }}" class="button round">{% trans %}Create a new survey{% endtrans %}</a>
 		</div>
 	</div>
 {% endblock %}

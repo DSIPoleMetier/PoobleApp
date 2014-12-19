@@ -56,10 +56,15 @@ class WizardSurveyController extends Controller
             $survey->addItem($item);
         }
 
-        $form = $this->createForm($survey->getCategory()->getType(), $survey);
+        $form = $this->createForm($survey->getCategory()->getType(), $survey);        
+        $form->add('back', 'submit', array('attr' => array('formnovalidate' => 'true')));
         $form->add('end', 'submit');
 
         $form->handleRequest($request);
+
+        if ($form->get('back')->isClicked()) {            
+            return $this->redirect($this->generateUrl('pooble_new'));
+        }
 
         if ($form->isValid()) {
             // var_dump(count($survey->getItems()));die;

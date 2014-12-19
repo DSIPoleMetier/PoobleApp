@@ -27,3 +27,7 @@ services:
         arguments: [@pooble.tokenizer]
         tags:
             - { name: doctrine.event_subscriber, connection: default }
+
+    pooble.cleaner.survey:
+        class: Lyon1\Bundle\PoobleBundle\Cleaner\SurveyCleaner
+        

@@ -53,7 +53,7 @@ class FrontSurveyController extends Controller
         }
 
         return array(
-            'survey' => $survey,
+            'survey' => $this->container->get('pooble.cleaner.survey')->clean($survey),
             'form' => $form->createView()
         );
     }

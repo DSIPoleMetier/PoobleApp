@@ -18,7 +18,8 @@
         "symfony/var-dumper": "2.6.*",
         "sensio/distribution-bundle": "~3.0",
         "sensio/framework-extra-bundle": "~3.0",
-        "incenteev/composer-parameter-handler": "~2.0"
+        "incenteev/composer-parameter-handler": "~2.0",
+        "lyon1/pooble-bundle": "dev-master"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

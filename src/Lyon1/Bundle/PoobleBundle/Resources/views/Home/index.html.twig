@@ -3,7 +3,16 @@
 {% block title %}{{ parent() }} Home{% endblock %}
 
 {% block body %}
-    {% include 'PoobleBundle::menu.html.twig' %}
-Index
+    <div class="row">
+    	<div class="small-12">
+			<h1 class="text-center">Bienvenue sur pooble application</h1>
+		</div>
+	</div>
+
+	<div class="row">
+    	<div class="small-4 small-centered columns">
+			<a href="{{ path('pooble_new') }}" class="button round">Créer un nouveau sondage</a>
+		</div>
+	</div>
 {% endblock %}
 

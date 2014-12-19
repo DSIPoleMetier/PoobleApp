@@ -6,6 +6,10 @@
     {% include 'PoobleBundle:WizardSurvey:breadcrumb.html.twig' %}
 
     <h1>Pooble created !</h1>
-
-    {{ id }}
+    
+    <a href="{{ path('participate', { 'token': survey.token }) }}">Participer au Pooble : {{ survey.name }}</a><br>
+     {{ survey.description }}
+     <br>
+     qui a été créé le {{ survey.createdAt|date('d/m/Y') }}<br>
+     qui contient {{ survey.items | length }} item{% if survey.items | length >1 %}s{% endif %}
 {% endblock %}

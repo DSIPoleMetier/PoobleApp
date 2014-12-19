@@ -11,13 +11,13 @@ use Lyon1\Bundle\PoobleBundle\Form\SurveyAnswerType;
 use Lyon1\Bundle\PoobleBundle\Entity\SurveyAnswerItem;
 
 
-class ParticipateSurveyController extends Controller
+class FrontSurveyController extends Controller
 {
     /**
      * @Route("/participate/{token}", name="participate")
      * @Template()
      */
-    public function newAction(Request $request, $token)
+    public function participateAction(Request $request, $token)
     {   
         # recupération du survey
         $em = $this->getDoctrine()->getManager();
@@ -60,4 +60,23 @@ class ParticipateSurveyController extends Controller
         );
     }
 
+     /**
+     * @Route("/view/{token}", name="view")
+     * @Template("PoobleBundle:FrontSurvey:participate.html.twig")
+     */
+    public function viewAction(Request $request, $token)
+    {   
+        # recupération du survey
+        $em = $this->getDoctrine()->getManager();
+        $survey = $em->getRepository('PoobleBundle:Survey')->findOneBy(array('token' => $token));
+        if (null == $survey) {
+            throw $this->createNotFoundException("token invalide");
+        }
+        
+        
+        return array(
+            'survey' => $survey
+        );
+    }
+    
 }

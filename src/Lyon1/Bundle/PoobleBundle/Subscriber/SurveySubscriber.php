@@ -22,12 +22,12 @@ class SurveySubscriber implements EventSubscriber
         );
     }
 
-    /*
     public function prePersist(LifecycleEventArgs $args)
     {
         $entity = $args->getEntity();
         $entityManager = $args->getEntityManager();
 
+    /*
         if ($entity instanceof Survey) {                    
             $entity
                 ->setToken($this->tokenizer->generateToken($entity))                   
@@ -36,6 +36,6 @@ class SurveySubscriber implements EventSubscriber
             ;
             var_dump($entity->getToken());
         }
-    }
     */
+    }
 }

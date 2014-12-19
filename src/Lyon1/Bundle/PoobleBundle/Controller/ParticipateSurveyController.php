@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 use Lyon1\Bundle\PoobleBundle\Entity\SurveyAnswer;
 use Lyon1\Bundle\PoobleBundle\Form\SurveyAnswerType;
+use Lyon1\Bundle\PoobleBundle\Entity\SurveyAnswerItem;
 
 
 class ParticipateSurveyController extends Controller
@@ -29,6 +30,29 @@ class ParticipateSurveyController extends Controller
         $answer->setSurvey($survey);
         $form = $this->createForm(new SurveyAnswerType(), $answer);
         $form->add('Valider', 'submit');
+        
+        $form->handleRequest($request);
+        if ($form->isValid()) {
+            $fields = $request->request->all();
+            $items=$survey->getItems();
+            foreach ($items as $item) {
+                $sai = new SurveyAnswerItem();
+                $sai->setItem($item);
+                $itemId = 'item_'.$item->getId();
+                if (isset($fields[$form->getName()][$itemId])) {
+                    $sai->setValue($fields[$form->getName()][$itemId]);
+                } else {
+                    $sai->setValue(0);
+                }
+                $answer->addAnswerItem($sai);
+            }
+            
+            $em = $this->getDoctrine()->getManager();
+            $answer->setCreatedAt(new \DateTime());
+            $answer = $em->persist($answer);
+            $em->flush();
+        }
+        
         
         return array(
             'survey' => $survey,

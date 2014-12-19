@@ -15,7 +15,8 @@ class SurveyAnswerType extends AbstractType
         
         foreach ($answer->getSurvey()->getItems() as $item) {
             $builder->add('item_'.$item->getId(), 'checkbox', array(
-                'mapped' => false
+                'mapped' => false,
+                'required' => false
             ));
         }
     }

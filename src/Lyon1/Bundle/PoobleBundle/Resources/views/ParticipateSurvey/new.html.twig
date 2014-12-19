@@ -18,7 +18,9 @@
                 <tr>
                     <th>{{ answer.name }}</th>
                     {% for answerItem in answer.answerItems %}
-                        <td>{{ answerItem.value }}</td>
+                        <td>
+                        <input type="checkbox" disabled="disabled" {% if answerItem.value == 1 %}checked="checked"{% endif %} />
+                        </td>
                     {% endfor %}
                 </tr>
             {% endfor %}

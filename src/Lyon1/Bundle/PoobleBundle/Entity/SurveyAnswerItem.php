@@ -24,7 +24,7 @@ class SurveyAnswerItem
     /**
      * @var string
      *
-     * @ORM\Column(name="value", type="string", length=10)
+     * @ORM\Column(name="value", type="string", length=10, nullable=true)
      */
     private $value;
 

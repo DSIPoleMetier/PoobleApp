@@ -46,7 +46,7 @@ class SurveyAnswer
     /**
      * @var SurveyAnswerItems[]
      *
-     * @ORM\OneToMany(targetEntity="SurveyAnswerItem", mappedBy="answer")
+     * @ORM\OneToMany(targetEntity="SurveyAnswerItem", mappedBy="answer", cascade={"persist"})
      */
     private $answerItems;
 
@@ -145,6 +145,7 @@ class SurveyAnswer
      */
     public function addAnswerItem(\Lyon1\Bundle\PoobleBundle\Entity\SurveyAnswerItem $answerItem)
     {
+        $answerItem->setAnswer($this);
         $this->answerItems[] = $answerItem;
 
         return $this;
